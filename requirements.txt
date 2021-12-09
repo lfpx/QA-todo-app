@@ -1,6 +1,6 @@
 Flask
 Flask-SQLAlchemy
-Flask-Testing=
+Flask-Testing
 Flask-WTF
 pytest
 pytest-cov

@@ -13,7 +13,9 @@ pipeline{
         }
         stage('Running tests'){
             steps{
-                sh 'Jenkins/run-tests.sh'
+                withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI')]) {
+                    sh 'Jenkins/run-tests.sh'
+                }
             }
         }
 

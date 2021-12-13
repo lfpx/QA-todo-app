@@ -1,8 +1,5 @@
 Flask
 Flask-SQLAlchemy
-Flask-Testing
 Flask-WTF
-pytest
-pytest-cov
 SQLAlchemy
 WTForms

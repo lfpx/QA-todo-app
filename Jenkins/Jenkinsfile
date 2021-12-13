@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    environment{
+        CREATE_SCHEMA = 'true'
+    }
     stages{
         stage('Installing system packages'){
             steps{

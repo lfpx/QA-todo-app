@@ -6,8 +6,8 @@ export DATABASE_URI
 echo '# Activating virtualenv .env'
 source .venv/bin/activate
 
-echo '# Installing modules from requirements.txt'
-python3 -m pip install -r requirements.txt
+echo '# Installing testing modules from tests/requirements.txt'
+python3 -m pip install -r tests/requirements.txt
 
 echo '# Running pyTest'
 python3 -m pytest \

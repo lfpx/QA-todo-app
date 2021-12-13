@@ -3,18 +3,18 @@ pipeline{
     stages{
         stage('Installing system packages'){
             steps{
-                sh 'Jenkins/install-system-packages.sh'
+                sh 'bash Jenkins/install-system-packages.sh'
             }
         }
         stage('Installing App requirements'){
             steps{
-                sh 'Jenkins/install-app-requirements.sh'
+                sh 'bash Jenkins/install-app-requirements.sh'
             }
         }
         stage('Running tests'){
             steps{
                 withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI')]) {
-                    sh 'Jenkins/run-tests.sh'
+                    sh 'bash Jenkins/run-tests.sh'
                 }
             }
         }

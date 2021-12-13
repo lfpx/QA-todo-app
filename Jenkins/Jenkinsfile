@@ -1,0 +1,21 @@
+pipeline{
+    agent any
+    stages{
+        stage('Installing system packages'){
+            steps{
+                sh 'Jenkins/install-system-packages.sh'
+            }
+        }
+        stage('Installing App requirements'){
+            steps{
+                sh 'Jenkins/install-app-requirements.sh'
+            }
+        }
+        stage('Running tests'){
+            steps{
+                sh 'Jenkins/run-tests.sh'
+            }
+        }
+
+    }
+}

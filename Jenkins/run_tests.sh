@@ -1,9 +1,4 @@
 #!/bin/bash
-# echo '# Exporting environment variables'
-# export CREATE_SCHEMA=true
-# export DATABASE_URI
-echo "DATABASE_URI=${DATABASE_URI}"
-
 echo '# Activating virtualenv .env'
 source .venv/bin/activate
 

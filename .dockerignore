@@ -1,0 +1,8 @@
+.git
+.gitignore
+.venv
+venv
+Jenkins
+Dockerfile
+.dockerignore
+tests

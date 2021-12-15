@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment{
         CREATE_SCHEMA = 'true'
-        RUN_APP = 'false'
+        RUN_APP = 'true'
     }
     stages{
         stage('Installing system packages'){
@@ -19,6 +19,22 @@ pipeline{
             steps{
                 withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI')]) {
                     sh 'bash Jenkins/run_tests.sh'
+                }
+            }
+        }
+        stage('Building container'){
+            steps{
+                sh 'bash Jenkins/build_container.sh'
+            }
+        }
+        stage('Running container'){
+            steps{
+                script{
+                    if (env.RUN_APP == 'true'){
+                        withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI')]) {
+                            sh 'bash Jenkins/run_container.sh'
+                        }
+                    }
                 }
             }
         }
@@ -41,10 +57,10 @@ pipeline{
         }
         success{
             sh "echo '## Build successful.'"
-            sh 'bash Jenkins/build_container.sh'
-            withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI')]) {
-                sh 'bash Jenkins/build_container.sh'
-            }
+            // sh 'bash Jenkins/build_container.sh'
+            // withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI')]) {
+            //     sh 'bash Jenkins/run_container.sh'
+            // }
         }
         failure{
             sh "echo '## Build failed!'"

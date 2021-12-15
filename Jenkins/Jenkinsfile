@@ -22,15 +22,17 @@ pipeline{
                 }
             }
         }
-        stage('Run app'){
-            steps{
-                script{
-                    if (env.RUN_APP == 'true'){
-                        sh 'bash jenkins/run_app.sh'
-                    }
-                }
-            }
-        }
+        // stage('Run app'){
+        //     steps{
+        //         script{
+        //             if (env.RUN_APP == 'true'){
+        //                 withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI')]) {
+        //                     sh 'bash jenkins/run_app.sh'
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     }
     post{
         always{
@@ -39,12 +41,13 @@ pipeline{
         }
         success{
             sh "echo '## Build successful."
+            sh 'bash Jenkins/build_container.sh'
             withCredentials([string(credentialsId: 'DATABASE_URI', variable: 'DATABASE_URI')]) {
                 sh 'bash Jenkins/build_container.sh'
             }
         }
         failure{
-            sh "echo 'Build failed!'"
+            sh "echo '## Build failed!'"
         }
     }
 }
